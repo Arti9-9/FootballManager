@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+<div class="container d-flex justify-content-center ">	
+<table  class="table table-striped table-hover">
+  <thead>
+    
+  </thead>
+  <tbody>
+  {% for game in games %}
+    <tr >
+      <th scope="row">{{game.date ? game.date|date('Y-m-d H:i:s') : '' }}</th>
+      <td ><a href="{{ path('game_show', {'id': game.id}) }}">{{game.title}}</a></td>
+      <td>{{game.score}}</td>
+    
+    </tr>
+ {% endfor %}
+   </tbody>
+</table>
+</div>
+{% endblock %}
