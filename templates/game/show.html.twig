@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Game{% endblock %}
+
+{% block body %}
+   <div class="container d-flex justify-content-center ">
+        <table  class="table table-bordered border-primary ">
+            <tbody>
+                <tr >
+                     <th>
+                         <div class="card text-center">
+                             <img src="{{game.homeTeam.logo}}" style="width:200px; height:250px;"class="card-img-top" alt="...">
+                             <div class="card-body">
+                                <a class="text-center" href="{{ path('team_show', {'id': game.homeTeam.id}) }}"s >{{game.homeTeam.name}}</a>
+                             </div>
+                         </div>
+                     <th>
+                     <th>
+                         <div class="card text-center">
+                             <img src="{{game.visitTeam.logo}}" style="width:200px; height:250px;"class="card-img-top" alt="...">
+                             <div class="card-body">
+                                <a class="text-center" href="{{ path('team_show', {'id': game.visitTeam.id}) }}"s >{{game.visitTeam.name}}</a>
+                             </div>
+                         </div>
+                     <th>
+                </tr> 
+            </tbody>
+        </table>
+        <h1 class="text-center">{{game.score}}</h1>
+         {% if is_granted('ROLE_ADMIN') %}
+         <center>
+         
+             <a class="btn btn-primary btn-circle" href="{{ path('game_edit' , {'id': game.id})  }}">
+                <i class="fa fa-life-ring">  Изменить счет </i>
+             </a>
+         </center>
+         {% endif %} 
+
+    </div>
+    <div class="container bg-info bg-gradient" style="height:300px; overflow-y: scroll; margin-top:20px;">
+        {% for event in game.events %}
+        <table  class="table" >
+            <tbody>
+              <tr>
+                <th style="width:10px;"> {{event.minute}}`</th>
+                <td >{{event.text}}</td>
+              </tr>
+            </tbody>
+        </table>
+        {% else %}
+            <h4 class ="text-center">Матч не начался</h4>
+        {% endfor %}
+    </div>
+
+    <h1>Отзывы</h1>
+
+    {% for comment in comments %}
+        <div class="media background_color_white mb-2">
+            <div class="media-body">
+                <h5> {{comment.user.login}} </h5>
+                <p> {{comment.textReview}} </p>
+                <p> {{comment.date ? review.date|date('Y-m-d H:i:s') : ''}} </p>
+            </div>
+        </div> 
+    {% endfor %}
+
+     {% if app.user %}
+        <h2>вы можете оставить комментрарий</h1>
+        {{ form_start(commentForm) }}
+        {{ form_end(commentForm) }}
+    {% endif %}
+    <a href="{{ path('game_index') }}">back to list</a>
+
+{% endblock %}
