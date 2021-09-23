@@ -6,14 +6,20 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+<<<<<<< HEAD
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+=======
+>>>>>>> d283724e13f7551e6dfbc71747f20f135958ca09
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
+<<<<<<< HEAD
  * @UniqueEntity(fields={"login"}, message="There is already an account with this login")
+=======
+>>>>>>> d283724e13f7551e6dfbc71747f20f135958ca09
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -204,8 +210,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+<<<<<<< HEAD
     public function __toString()
     {
         return $this->login;
     }
+=======
+>>>>>>> d283724e13f7551e6dfbc71747f20f135958ca09
 }
